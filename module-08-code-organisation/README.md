@@ -186,14 +186,17 @@ Every log line has the same shape. Log aggregators (Datadog, ELK, CloudWatch) ca
 
 ---
 
-## Exercises
+## Capstone Exercises
 
-| #   | Folder                                                      | What you'll practice                                                                                     |
-| --- | ----------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| 1   | [`exercises/01-split-modules`](exercises/01-split-modules/) | Refactor a monolith (`compileDigest`) into three focused modules. Tests must stay green after each move. |
-| 2   | [`exercises/02-error-config`](exercises/02-error-config/)   | Build `AppError`, `loadConfig`, and `formatLogLine` from scratch.                                        |
+These exercises pull together skills from across the course. Each has multiple well-organised source files.
 
-Run all module tests:
+| #   | Folder                                                            | Skills combined                                                          |
+| --- | ----------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| 1   | [`exercises/01-dino-dashboard`](exercises/01-dino-dashboard/)     | Fetch, Promise.all, map/filter/reduce, object literals, `this`           |
+| 2   | [`exercises/02-alert-pipeline`](exercises/02-alert-pipeline/)     | Closures, higher-order functions, map/filter, immutability, composition  |
+| 3   | [`exercises/03-park-config`](exercises/03-park-config/)           | Classes, custom errors, config validation, object methods, module design |
+
+Run tests:
 
 ```bash
 cd module-08-code-organisation/exercises/<exercise>/starter && pnpm install && pnpm test

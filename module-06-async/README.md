@@ -185,7 +185,7 @@ You rarely need to think about this in daily code, but it explains why `setTimeo
 | --- | --------------------------------------------------------------------- | --------------------------------------------------------------------------- |
 | 1   | [`exercises/01-retry-timeout`](exercises/01-retry-timeout/)           | Build `withTimeout` and `runWithRetry` - deadline + exponential backoff.    |
 | 2   | [`exercises/02-promise-allsettled`](exercises/02-promise-allsettled/) | Aggregate sensor results into a uniform summary using `Promise.allSettled`. |
-| 3   | [`exercises/03-abort-controller`](exercises/03-abort-controller/)     | Implement `createCancellableTask` that respects an `AbortSignal`.           |
+| 3   | [`exercises/03-fetch-combine`](exercises/03-fetch-combine/)           | Fetch users & posts from a public API in parallel, combine into summaries.  |
 
 Run all module tests:
 

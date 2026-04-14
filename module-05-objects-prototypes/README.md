@@ -11,10 +11,47 @@ By the end of this module you should be able to:
 
 ---
 
-## 1. The prototype chain
+## 1. Object literals and `this`
 
 ```bash
-node module-05-objects-prototypes/demo/01-prototype-chain
+node module-05-objects-prototypes/demo/01-object-literals
+```
+
+An object literal can hold data *and* behaviour side by side. Methods defined inside the literal use `this` to refer to the object they're called on:
+
+```js
+const feeder = {
+  name: 'Canyon Feeder',
+  supply: 50,
+
+  stock(kg) {
+    this.supply += kg;
+    return this.supply;
+  },
+
+  status() {
+    return `${this.name}: ${this.supply}kg remaining`;
+  },
+};
+
+feeder.status(); // "Canyon Feeder: 50kg remaining"
+```
+
+`this` is set at **call time** - it's the object to the left of the dot. If you extract a method into a standalone variable, `this` becomes `undefined` (in strict mode / ESM):
+
+```js
+const ref = feeder.status;
+ref(); // TypeError — no object, no this
+```
+
+This is the single most important thing to remember about `this` in JavaScript. Keep calling methods via the object, or use `.bind()` to lock the context.
+
+---
+
+## 2. The prototype chain
+
+```bash
+node module-05-objects-prototypes/demo/02-prototype-chain
 ```
 
 Every object in JavaScript has a hidden link to another object - its **prototype**. When you access a property that doesn't exist on the object itself, JavaScript walks up the chain until it finds it or reaches `null`.
@@ -50,10 +87,10 @@ Theropod.prototype.constructor = Theropod;
 
 ---
 
-## 2. Classes - sugar over prototypes
+## 3. Classes - sugar over prototypes
 
 ```bash
-node module-05-objects-prototypes/demo/02-classes
+node module-05-objects-prototypes/demo/03-classes
 ```
 
 The same hierarchy, rewritten with `class`:
@@ -118,10 +155,10 @@ DinoUtils.isDangerous(rex); // called on the class, not an instance
 
 ---
 
-## 3. Map and Set
+## 4. Map and Set
 
 ```bash
-node module-05-objects-prototypes/demo/03-maps-and-sets
+node module-05-objects-prototypes/demo/04-maps-and-sets
 ```
 
 ### When plain objects aren't enough
@@ -155,11 +192,11 @@ Combine them: `Map` for id→record lookups, `Set` for "have we seen this specie
 
 ---
 
-## 4. Composition over inheritance
+## 5. Composition over inheritance
 
 ```bash
-node module-05-objects-prototypes/demo/04-composition
-node module-05-objects-prototypes/demo/05-composition-destructuring
+node module-05-objects-prototypes/demo/05-composition
+node module-05-objects-prototypes/demo/06-composition-destructuring
 ```
 
 Deep inheritance trees get brittle. What if you need a dinosaur that can swim AND fly AND has armor? With inheritance you'd need `SwimmingFlyingArmoredDinosaur extends ...` - a combinatorial nightmare.
@@ -189,7 +226,7 @@ Need swim too? Just add `...canSwim(state)`. No class hierarchy changes. Each ca
 
 ### Factory arguments with destructuring
 
-Demo 05 shows a common production pattern - destructuring the options object:
+Demo 06 shows a common production pattern - destructuring the options object:
 
 ```js
 function createRanger({ name, callsign, zone }) {
@@ -211,8 +248,8 @@ const { name, zone } = ellie; // pull data back out
 
 | #   | Folder                                                    | What you'll practice                                                                    |
 | --- | --------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| 1   | [`01-prototypes`](exercises/01-prototypes/)               | Build `Dinosaur` / `FlyingDinosaur` with constructors and `Object.create` - no `class`. |
-| 2   | [`02-map-and-set`](exercises/02-map-and-set/)             | `createDinoRegistry` with `Map` + `Set`: add, get, findByZone, sorted unique species.   |
+| 1   | [`01-dino-feeder`](exercises/01-dino-feeder/)             | Object literal with methods and `this`: stock, feed, remaining, log.                    |
+| 2   | [`02-prototypes`](exercises/02-prototypes/)               | Build `Dinosaur` / `FlyingDinosaur` with constructors and `Object.create` - no `class`. |
 | 3   | [`03-mixin-composition`](exercises/03-mixin-composition/) | `withSwim`, `withFly`, `withArmor` - spread composition, no mutation.                   |
 
 Run tests:

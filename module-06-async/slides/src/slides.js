@@ -8,13 +8,15 @@ export const slides = [
     },
   },
   {
-    type: 'welcome',
+    type: 'standard',
     content: {
-      title: 'Pings arrive out of order',
+      title: 'Learning objectives',
+      icon: 'target',
       points: [
-        'Some sensors resolve, some reject, some never answer.',
-        'The event loop schedules work - microtasks vs macrotasks matter.',
-        'AbortController lets rangers cancel a search mid-flight.',
+        'Chain promises and centralise errors with `try`/`catch` + `async`/`await`.',
+        'Use `Promise.all`, `allSettled`, and `race` for realistic concurrency.',
+        'Model timeouts and cancellation with `AbortController` and `AbortSignal`.',
+        'Picture the event loop: microtasks vs macrotasks, and why order matters.',
       ],
     },
   },
@@ -33,35 +35,163 @@ export const slides = [
   {
     type: 'code',
     content: {
-      title: 'async / await = readable chains',
-      code: `async function pingZone(id) {
-  const res = await fetchZone(id);
-  return normalize(res);
-}`,
+      title: 'Promise basics',
+      code: `const ping = new Promise((resolve, reject) => {
+  setTimeout(() => resolve({ zone: 'North', status: 'ok' }), 500);
+});
+
+ping
+  .then(data => console.log('Zone:', data.zone))
+  .catch(err => console.error('Sensor failed:', err));`,
       highlights: [
-        '`await` pauses the async function, not the whole thread',
-        'Wrap risky blocks in try/catch like synchronous code',
+        'The executor runs immediately — `resolve` or `reject` settle the promise once',
+        '`.then` runs on success, `.catch` on failure — always handle both',
       ],
     },
   },
   {
-    type: 'comparison',
+    type: 'standard',
     content: {
-      title: 'Promise.all vs allSettled',
-      left: {
-        label: 'Promise.all',
-        items: [
-          'Fails fast - one rejection rejects all',
-          'Great when every sensor must succeed',
-        ],
-      },
-      right: {
-        label: 'Promise.allSettled',
-        items: [
-          'Wait for every attempt; inspect status per item',
-          'Great for dashboards: show green/red per zone',
-        ],
-      },
+      title: 'async / await',
+      icon: 'pause',
+      points: [
+        '`async` marks a function as returning a Promise — even if you just return a value.',
+        '`await` pauses *that function* until the Promise settles — the event loop keeps running.',
+        'Error handling reads like synchronous code: `try`/`catch` instead of `.catch()` chains.',
+        'Any function that calls `await` must be `async` — it propagates up the call stack.',
+      ],
+    },
+  },
+  {
+    type: 'code',
+    content: {
+      title: 'async / await in action',
+      code: `async function pingZone(id) {
+  try {
+    const res = await fetch(\`/api/zones/\${id}\`);
+    const data = await res.json();
+    console.log('Zone:', data.zone);
+    return data;
+  } catch (err) {
+    console.error('Ping failed:', err.message);
+  }
+}
+
+await pingZone('north');`,
+      highlights: [
+        'Each `await` pauses the function, not the whole thread',
+        '`try`/`catch` replaces `.then`/`.catch` — same Promise underneath',
+      ],
+    },
+  },
+  {
+    type: 'standard',
+    content: {
+      title: 'Promise concurrency methods',
+      icon: 'layers',
+      points: [
+        '`Promise.all([ ])` — resolves when *every* promise fulfils; rejects on the *first* failure.',
+        '`Promise.allSettled([ ])` — waits for all to finish; never rejects. Each result has `status`, `value` or `reason`.',
+        '`Promise.race([ ])` — settles as soon as *any* promise settles (first wins, fulfilled or rejected).',
+        '`Promise.any([ ])` — resolves with the *first fulfilment*; rejects only if *all* reject (`AggregateError`).',
+      ],
+    },
+  },
+  {
+    type: 'code',
+    content: {
+      title: 'Promise.all — all or nothing',
+      code: `// simulate a sensor ping (resolves or rejects after a delay)
+const pingZone = (id) =>
+  new Promise((resolve, reject) =>
+    setTimeout(() => resolve({ zone: id, status: 'ok' }), 300)
+  );
+
+const [north, south] = await Promise.all([
+  pingZone('north'),
+  pingZone('south'),
+]);
+// Both resolved — use north & south
+// If either rejects, the whole call rejects`,
+      highlights: [
+        'Runs promises in parallel — total time is the *slowest*, not the sum',
+        'One rejection short-circuits: wrap in try/catch if partial results are OK',
+      ],
+    },
+  },
+  {
+    type: 'code',
+    content: {
+      title: 'Promise.allSettled — inspect every result',
+      code: `const pingZone = (id) =>
+  new Promise((resolve, reject) =>
+    setTimeout(
+      () => (id === 'south' ? reject('offline') : resolve({ zone: id })),
+      300
+    )
+  );
+
+const results = await Promise.allSettled([
+  pingZone('north'),
+  pingZone('south'),   // this one rejects
+  pingZone('east'),
+]);
+
+results.forEach(r => {
+  if (r.status === 'fulfilled') console.log(r.value);
+  else console.error('Failed:', r.reason);
+});`,
+      highlights: [
+        'Never rejects — every result has `status` plus `value` or `reason`',
+        'Perfect for dashboards: show green/red per zone',
+      ],
+    },
+  },
+  {
+    type: 'code',
+    content: {
+      title: 'Promise.race — first to settle wins',
+      code: `const pingZone = (id, ms) =>
+  new Promise(resolve =>
+    setTimeout(() => resolve({ zone: id }), ms)
+  );
+
+const timeout = (ms) =>
+  new Promise((_, reject) =>
+    setTimeout(() => reject(new Error('Timed out')), ms)
+  );
+
+const result = await Promise.race([
+  pingZone('north', 200),   // resolves first => wins
+  timeout(3000),             // never fires
+]);`,
+      highlights: [
+        'First promise to settle (fulfilled *or* rejected) wins — the rest are ignored',
+        'Classic timeout pattern: race the real work against a timer',
+      ],
+    },
+  },
+  {
+    type: 'code',
+    content: {
+      title: 'Promise.any — first to fulfil wins',
+      code: `const pingZone = (id, ms, fail = false) =>
+  new Promise((resolve, reject) =>
+    setTimeout(
+      () => (fail ? reject('offline') : resolve({ zone: id })),
+      ms
+    )
+  );
+
+const firstOk = await Promise.any([
+  pingZone('north', 500),          // slow but works
+  pingZone('south', 100, true),    // fast but fails — ignored
+  pingZone('east', 200),           // fast, works => wins
+]);`,
+      highlights: [
+        'Rejections are silently ignored — only fulfilments count',
+        'If *all* reject, throws `AggregateError` containing every reason',
+      ],
     },
   },
   {
@@ -93,58 +223,73 @@ export const slides = [
   {
     type: 'standard',
     content: {
-      title: 'AbortController',
-      icon: 'ban',
+      title: 'The event loop — why it matters',
+      icon: 'clock',
       points: [
-        'Signal cancellation through `AbortSignal` - fetch and custom APIs.',
-        'Listeners should stop work promptly when aborted.',
-        'Great UX: user navigates away → cancel in-flight searches.',
+        'JavaScript is *single-threaded* — only one piece of code runs at a time.',
+        'So how does it handle thousands of concurrent requests? The *event loop*.',
+        'The loop picks the next task, runs it to completion, then picks the next.',
+        'Your code never runs *in parallel* — it runs *in turns*.',
       ],
     },
   },
   {
     type: 'standard',
     content: {
-      title: 'Event loop intuition',
-      icon: 'clock',
+      title: 'One iteration of the loop',
+      icon: 'repeat',
       points: [
-        'Macrotasks: timers, I/O callbacks.',
-        'Microtasks: promise reactions, queueMicrotask - run before next render/timer.',
-        '`process.nextTick` runs even earlier on Node - advanced edge cases.',
+        '1. Pick one *macrotask* from the queue (timer callback, I/O result, etc.).',
+        '2. Run it to completion — no other JS can interrupt it.',
+        '3. Drain *all* microtasks (`Promise.then` callbacks, `queueMicrotask`).',
+        '4. Render (browser) / check for I/O (Node) — then repeat from step 1.',
       ],
     },
   },
   {
-    type: 'rules',
+    type: 'standard',
     content: {
-      title: 'Field rules - Module 6',
-      rules: [
-        {
-          rule: 'Handle or propagate rejections',
-          example: 'Never fire-and-forget a promise in production.',
-          icon: 'alert-circle',
-        },
-        {
-          rule: 'Choose the right aggregator',
-          example: 'all vs allSettled vs race - semantics differ.',
-          icon: 'scale',
-        },
-        {
-          rule: 'Model cancellation explicitly',
-          example: 'AbortController beats “ignore the result”.',
-          icon: 'stop',
-        },
+      title: 'Macrotasks vs microtasks',
+      icon: 'layers',
+      points: [
+        '*Macrotasks*: `setTimeout`, `setInterval`, I/O callbacks, `setImmediate` (Node).',
+        '*Microtasks*: `.then` / `.catch` / `.finally`, `await` continuations, `queueMicrotask`.',
+        'Microtasks always run *before* the next macrotask — they jump the queue.',
+        'That is why a resolved promise fires before a `setTimeout(…, 0)`.',
       ],
     },
   },
   {
-    type: 'welcome',
+    type: 'code',
     content: {
-      title: 'Exercises - control room drills',
+      title: 'Predict the output',
+      code: `console.log('1 — synchronous');
+
+setTimeout(() => console.log('2 — macrotask (timer)'), 0);
+
+Promise.resolve()
+  .then(() => console.log('3 — microtask (promise)'));
+
+console.log('4 — synchronous');
+
+// Output: 1, 4, 3, 2`,
+      highlights: [
+        'Synchronous code runs first (1, 4) — it is the *current* task',
+        'Microtasks drain next (3) — before any timer fires',
+        'The `setTimeout` callback (2) waits for the *next* macrotask turn',
+      ],
+    },
+  },
+  {
+    type: 'standard',
+    content: {
+      title: 'Why this matters in practice',
+      icon: 'alert-circle',
       points: [
-        '01 - Retry + timeout around flaky pings',
-        '02 - Batch sensors with allSettled',
-        '03 - Cancellable search task',
+        'A long synchronous function *blocks the entire loop* — no I/O, no timers, nothing.',
+        '`await` yields control back to the loop — other work can run between awaits.',
+        'Stacking microtasks endlessly (e.g. recursive `.then`) starves macrotasks — timers never fire.',
+        'Rule of thumb: keep each turn of the loop *short*. Offload heavy work to workers or streams.',
       ],
     },
   },

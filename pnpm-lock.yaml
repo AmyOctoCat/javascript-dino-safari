@@ -376,25 +376,25 @@ importers:
 
   module-05-objects-prototypes: {}
 
-  module-05-objects-prototypes/exercises/01-prototypes/solution:
+  module-05-objects-prototypes/exercises/01-dino-feeder/solution:
     devDependencies:
       vitest:
         specifier: ^2.1.6
         version: 2.1.9(lightningcss@1.32.0)
 
-  module-05-objects-prototypes/exercises/01-prototypes/starter:
+  module-05-objects-prototypes/exercises/01-dino-feeder/starter:
     devDependencies:
       vitest:
         specifier: ^2.1.6
         version: 2.1.9(lightningcss@1.32.0)
 
-  module-05-objects-prototypes/exercises/02-map-and-set/solution:
+  module-05-objects-prototypes/exercises/02-prototypes/solution:
     devDependencies:
       vitest:
         specifier: ^2.1.6
         version: 2.1.9(lightningcss@1.32.0)
 
-  module-05-objects-prototypes/exercises/02-map-and-set/starter:
+  module-05-objects-prototypes/exercises/02-prototypes/starter:
     devDependencies:
       vitest:
         specifier: ^2.1.6
@@ -469,13 +469,13 @@ importers:
         specifier: ^2.1.6
         version: 2.1.9(lightningcss@1.32.0)
 
-  module-06-async/exercises/03-abort-controller/solution:
+  module-06-async/exercises/03-fetch-combine/solution:
     devDependencies:
       vitest:
         specifier: ^2.1.6
         version: 2.1.9(lightningcss@1.32.0)
 
-  module-06-async/exercises/03-abort-controller/starter:
+  module-06-async/exercises/03-fetch-combine/starter:
     devDependencies:
       vitest:
         specifier: ^2.1.6
@@ -583,25 +583,37 @@ importers:
 
   module-08-code-organisation: {}
 
-  module-08-code-organisation/exercises/01-split-modules/solution:
+  module-08-code-organisation/exercises/01-dino-dashboard/solution:
     devDependencies:
       vitest:
         specifier: ^2.1.6
         version: 2.1.9(lightningcss@1.32.0)
 
-  module-08-code-organisation/exercises/01-split-modules/starter:
+  module-08-code-organisation/exercises/01-dino-dashboard/starter:
     devDependencies:
       vitest:
         specifier: ^2.1.6
         version: 2.1.9(lightningcss@1.32.0)
 
-  module-08-code-organisation/exercises/02-error-config/solution:
+  module-08-code-organisation/exercises/02-alert-pipeline/solution:
     devDependencies:
       vitest:
         specifier: ^2.1.6
         version: 2.1.9(lightningcss@1.32.0)
 
-  module-08-code-organisation/exercises/02-error-config/starter:
+  module-08-code-organisation/exercises/02-alert-pipeline/starter:
+    devDependencies:
+      vitest:
+        specifier: ^2.1.6
+        version: 2.1.9(lightningcss@1.32.0)
+
+  module-08-code-organisation/exercises/03-park-config/solution:
+    devDependencies:
+      vitest:
+        specifier: ^2.1.6
+        version: 2.1.9(lightningcss@1.32.0)
+
+  module-08-code-organisation/exercises/03-park-config/starter:
     devDependencies:
       vitest:
         specifier: ^2.1.6

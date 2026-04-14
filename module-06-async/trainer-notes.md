@@ -28,18 +28,27 @@ Students can write async code confidently: chain promises, use `async`/`await`, 
 - Key takeaway: promise `.then` callbacks run before `setTimeout` even if the timer is 0ms.
 - Keep this short (~5 min). It's conceptual scaffolding, not something students need to write.
 
+### 04 - Fetch from a real API
+
+- Run the demo — it hits JSONPlaceholder live. Requires internet.
+- Walk through the four sections: single fetch, 404 handling, network error (bad domain), parallel fetch with `Promise.all`.
+- Stress that `fetch` does **not** reject on HTTP errors (404, 500) — only on network failures. You must check `res.ok`.
+- Show how `try`/`catch` catches both network errors and the manual `throw` from a bad status code.
+- This demo leads directly into Exercise 03 (fetch-combine).
+
 ## Exercises
 
 | #   | Folder                  | Key skills                                | Notes                                  |
 | --- | ----------------------- | ----------------------------------------- | -------------------------------------- |
 | 1   | `01-retry-timeout`      | `Promise.race`, retry loop, backoff       | `withTimeout` and `runWithRetry`.      |
 | 2   | `02-promise-allsettled` | `Promise.allSettled`, result aggregation  | Uniform summary of fulfilled/rejected. |
-| 3   | `03-abort-controller`   | `AbortController`, `AbortSignal`, cleanup | `createCancellableTask` pattern.       |
+| 3   | `03-fetch-combine`      | `fetch`, `Promise.all`, data aggregation  | Real API call; `fetchFn` injected for testability. |
 
 ## Timing
 
 - Demo 01 (promises + async/await): ~20 min.
 - Demo 02 (concurrency patterns): ~15 min.
+- Demo 04 (fetch from API): ~10 min.
 - Demo 03 (event loop): ~5–10 min.
 - Exercises: ~30–40 min for all three.
 - Total: ~1.5 hours.
@@ -50,4 +59,5 @@ Students can write async code confidently: chain promises, use `async`/`await`, 
 - **`try`/`catch` not wrapping `await`**: students put `await` outside the `try` block and rejections are unhandled.
 - **`Promise.all` vs `allSettled` confusion**: `all` rejects on first failure; `allSettled` never rejects. Students mix them up.
 - **Timer leaks in timeout wrappers**: the losing `setTimeout` in `Promise.race` keeps running. Mention `clearTimeout` cleanup.
-- **AbortController signal not checked**: students create the controller but never check `signal.aborted` inside the async work.
+- **Forgetting to `.json()` the response**: `fetch` resolves with a `Response`, not the parsed body. Students need `await res.json()`.
+- **Sequential instead of parallel**: students `await` each fetch one at a time instead of using `Promise.all`. It works but is slower — point it out.

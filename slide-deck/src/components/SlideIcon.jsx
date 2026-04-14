@@ -51,6 +51,7 @@ import {
   Upload,
   Mail,
   Lock,
+  Shield,
   Calendar,
   Tag,
   Mouse,
@@ -74,6 +75,7 @@ import {
   User,
   FolderPlus,
   FileCode,
+  Grid3x3,
 } from "lucide-react";
 
 // Map icon names to Lucide components
@@ -100,6 +102,7 @@ const iconMap = {
   box: Package,
   puzzle: Puzzle,
   template: LayoutTemplate,
+  grid: Grid3x3,
   square: Square,
 
   // Actions & Effects
@@ -186,6 +189,7 @@ const iconMap = {
   // Security
   lock: Lock,
   key: Lock,
+  shield: Shield,
 
   // Misc
   eye: Eye,

@@ -26,26 +26,32 @@ Students understand how to structure a growing JS codebase: feature folders vs l
 - `formatLogLine` - consistent structured logging. Show level, timestamp, message, context.
 - Ask: "Where should you catch errors - deep in the helper or at the edge?" (At the edge. Helpers throw; the composition root catches and logs.)
 
-## Exercises
+## Capstone Exercises
 
-| #   | Folder             | Key skills                                          | Notes                                                                                                                           |
-| --- | ------------------ | --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| 1   | `01-split-modules` | Refactoring, module boundaries, tests as safety net | Split `compileDigest` monolith into `normalize-zones`, `count-alerts`, `compile-digest`. Tests must stay green after each move. |
-| 2   | `02-error-config`  | Custom errors, env config, log formatting           | `AppError`, `loadConfig`, `formatLogLine`.                                                                                      |
+These are multi-file capstones drawing from skills across the whole course.
+
+| #   | Folder               | Skills combined                                           | Notes                                                                                      |
+| --- | -------------------- | --------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| 1   | `01-dino-dashboard`  | Fetch, Promise.all, map/reduce, objects, `this`           | 3 files: fetch-data, transform, dashboard. Hits JSONPlaceholder (mock in tests).           |
+| 2   | `02-alert-pipeline`  | Closures, HOFs, map/filter, immutability, composition     | 4 files: validate, normalise, deduplicate (closure/Set), pipeline composer.                |
+| 3   | `03-park-config`     | Classes, errors, config validation, object methods        | 3 files: AppError class, config loader, levelled logger with structured output.            |
 
 ## Timing
 
 - Demo 01 (project structure): ~10 min.
 - Demo 02 (module contracts): ~15 min.
 - Demo 03 (error handling): ~10 min.
-- Exercise 01 (split modules): ~25–30 min.
-- Exercise 02 (error/config): ~20 min.
-- Total: ~1.5 hours.
+- Capstone 01 (dashboard): ~25–30 min.
+- Capstone 02 (alert pipeline): ~25–30 min.
+- Capstone 03 (park config): ~20–25 min.
+- Total: ~2–2.5 hours.
 
 ## Common issues
 
 - **Circular imports**: students import a helper from another module that imports back. Node resolves it but with `undefined` at the point of use. Explain the symptom: "TypeError: X is not a function" at runtime.
-- **Breaking tests while refactoring**: students change function signatures during extraction. Emphasise: move code first, refactor second. Run tests after every small step.
-- **Config validation too lax**: students check `if (!env.VAR)` which treats `""` and `"0"` as missing. Use explicit `=== undefined` or `.trim()` checks.
-- **Error subclass missing `this.name`**: `error.name` defaults to `"Error"`. Set `this.name = 'AppError'` or use the class name explicitly for better stack traces.
-- **Logging inconsistency**: students use different formats per function. Show how a single `formatLogLine` keeps everything uniform for log parsers.
+- **Forgetting `.json()` on fetch response**: `fetch` resolves with a `Response`, not parsed data. Remind them of the Module 6 demo.
+- **Mutating input in normalise**: students modify the original alert object. Tests check the original is untouched.
+- **Deduplicator closure shared across tests**: each call to `processAlerts` should create a fresh deduplicator.
+- **Config validation too lax**: students check `if (!env.VAR)` which treats `""` and `"0"` as missing. Use explicit checks.
+- **Error subclass missing `this.name`**: `error.name` defaults to `"Error"`. Set `this.name = 'AppError'` for better stack traces.
+- **Logger level filtering**: students forget the level hierarchy. Debug < info < warn < error. A debug message should not appear when level is info.

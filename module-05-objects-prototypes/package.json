@@ -6,10 +6,11 @@
   "description": "Module 5 - The Dinosaur Registry: prototypes, classes, Maps/Sets, composition",
   "scripts": {
     "test": "vitest run --root .",
-    "demo:proto": "node demo/01-prototype-chain",
-    "demo:class": "node demo/02-classes",
-    "demo:maps": "node demo/03-maps-and-sets",
-    "demo:compose": "node demo/04-composition",
-    "demo:compose:destructure": "node demo/05-composition-destructuring"
+    "demo:obj": "node demo/01-object-literals",
+    "demo:proto": "node demo/02-prototype-chain",
+    "demo:class": "node demo/03-classes",
+    "demo:maps": "node demo/04-maps-and-sets",
+    "demo:compose": "node demo/05-composition",
+    "demo:compose:destructure": "node demo/06-composition-destructuring"
   }
 }

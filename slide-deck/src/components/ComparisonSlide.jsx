@@ -1,6 +1,7 @@
+import { InlineMarkdown } from "./InlineMarkdown";
+
 export function ComparisonSlide({ content }) {
   const renderPanel = (panel, color) => {
-    // Support both code blocks and item lists
     if (panel.code) {
       return (
         <pre className="bg-slate-900 rounded-lg p-4 overflow-x-auto">
@@ -17,7 +18,7 @@ export function ComparisonSlide({ content }) {
             key={i}
             className="text-lg text-gray-400 py-2 border-b border-slate-700 last:border-b-0"
           >
-            {item}
+            <InlineMarkdown text={item} />
           </li>
         ))}
       </ul>

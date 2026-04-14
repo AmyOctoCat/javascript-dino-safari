@@ -8,6 +8,7 @@
     "test": "vitest run --root .",
     "demo:promises": "node demo/01-promise-fundamentals",
     "demo:concurrency": "node demo/02-concurrency-patterns",
-    "demo:eventloop": "node demo/03-event-loop"
+    "demo:eventloop": "node demo/03-event-loop",
+    "demo:fetch": "node demo/04-fetch-from-api"
   }
 }

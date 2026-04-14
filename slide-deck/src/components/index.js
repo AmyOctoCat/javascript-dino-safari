@@ -7,3 +7,4 @@ export { WelcomeSlide } from "./WelcomeSlide";
 export { ModulesSlide } from "./ModulesSlide";
 export { ThreeWayComparison } from "./ThreeWayComparison";
 export { SlideIcon, availableIcons } from "./SlideIcon";
+export { InlineMarkdown } from "./InlineMarkdown";
