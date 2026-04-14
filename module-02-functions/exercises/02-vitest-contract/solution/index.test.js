@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { formatSighting } from './start.js';
+import { formatSighting } from './format-sighting.js';
 
 describe('02-vitest-contract: formatSighting', () => {
   it('formats a full record', () => {

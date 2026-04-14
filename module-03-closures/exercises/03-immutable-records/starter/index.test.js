@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { bumpDangerLevel, renameZone } from './index.js';
+import { bumpDangerLevel, renameZone } from './record-transforms.js';
 
 describe('01-immutable-records', () => {
   it('bumpDangerLevel does not mutate', () => {

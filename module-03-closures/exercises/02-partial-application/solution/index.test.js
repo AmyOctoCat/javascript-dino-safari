@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { createAlertFn, createTaggedLogger } from './index.js';
+import { createAlertFn } from './create-alert-fn.js';
+import { createTaggedLogger } from './create-tagged-logger.js';
 
 describe('02-partial-application', () => {
   it('createAlertFn bakes in severity', () => {

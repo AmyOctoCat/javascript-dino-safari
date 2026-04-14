@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node tracker.js",
     "lint": "eslint tracker.js",
-    "test": "vitest run"
+    "test": "vitest run",
+    "debug": "node --inspect-brk tracker.js"
   },
   "devDependencies": {
     "vitest": "^2.1.6"

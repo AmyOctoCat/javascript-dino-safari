@@ -1,20 +1,9 @@
-export function Dinosaur(name, species, zone) {
-  this.name = name;
-  this.species = species;
-  this.zone = zone;
-}
+import { Dinosaur, FlyingDinosaur } from './dinosaur.js';
 
-Dinosaur.prototype.describe = function describe() {
-  return `${this.name} — ${this.species} @ ${this.zone}`;
-};
+const tank = new Dinosaur('Tank', 'Triceratops', 'Herbivore Meadow');
+console.log(tank.describe());
 
-export function FlyingDinosaur(name, species, zone, wingspanM) {
-  Dinosaur.call(this, name, species, zone);
-  this.wingspanM = wingspanM;
-}
-
-FlyingDinosaur.prototype = Object.create(Dinosaur.prototype);
-FlyingDinosaur.prototype.constructor = FlyingDinosaur;
-FlyingDinosaur.prototype.describe = function describe() {
-  return `${this.name} — ${this.species} @ ${this.zone} — wingspan ${this.wingspanM}m`;
-};
+const skyler = new FlyingDinosaur('Skyler', 'Pteranodon', 'Aviary Ascent', 6);
+console.log(skyler.describe());
+console.log('Is Dinosaur?', skyler instanceof Dinosaur);
+console.log('Wingspan:', skyler.wingspanM);

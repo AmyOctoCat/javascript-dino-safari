@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { buildMigrationReport, countByZone, filterHighRiskZones, toLogLines } from './index.js';
+import { buildMigrationReport, countByZone, filterHighRiskZones, toLogLines } from './pipeline.js';
 
 const sample = [
   { zone: 'north', headcount: 12, risk: 'high' },

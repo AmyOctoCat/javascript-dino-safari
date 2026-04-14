@@ -1,5 +1,14 @@
-export const sortNumbers = (numbers) => numbers.sort((a, b) => a - b);
+import { sortNumbers, sortByDanger, sortByName } from './sorters.js';
 
-export const sortByDanger = (dinos) => dinos.sort((a, b) => b.dangerLevel - a.dangerLevel);
+const numbers = [10, 1, 21, 2, -5, 0];
+console.log('sortNumbers:', sortNumbers(numbers));
 
-export const sortByName = (dinos) => dinos.sort((a, b) => a.species.localeCompare(b.species));
+const dinos = [
+  { species: 'Compy', dangerLevel: 2 },
+  { species: 'Rex', dangerLevel: 9 },
+  { species: 'Raptor', dangerLevel: 7 },
+  { species: 'Bronto', dangerLevel: 1 },
+];
+
+console.log('sortByDanger:', sortByDanger(dinos));
+console.log('sortByName:', sortByName(dinos));

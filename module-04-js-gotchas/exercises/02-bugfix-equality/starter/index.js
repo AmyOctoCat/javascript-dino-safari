@@ -1,45 +1,34 @@
-// Bug Hunt: Equality & typeof
-// Every function below has a subtle bug related to equality checks or typeof.
-// The tests describe the CORRECT behaviour — run them, read the failures,
-// and fix the code.
+import {
+  isNullish,
+  betterTypeof,
+  isActuallyNaN,
+  isArray,
+  areSameValue,
+} from './equality.js';
 
-/**
- * Return true when `val` is null OR undefined, false otherwise.
- */
-export function isNullish(val) {
-  return val === null;
-}
+console.log('--- isNullish ---');
+console.log('isNullish(null):', isNullish(null));
+console.log('isNullish(undefined):', isNullish(undefined));
+console.log('isNullish(0):', isNullish(0));
+console.log("isNullish(''):", isNullish(''));
 
-/**
- * Return a more useful type string than `typeof` gives.
- * - null  → "null"   (not "object")
- * - arrays → "array" (not "object")
- * - everything else → whatever typeof returns
- */
-export function betterTypeof(val) {
-  return typeof val;
-}
+console.log('\n--- betterTypeof ---');
+console.log('betterTypeof(null):', betterTypeof(null));
+console.log('betterTypeof([1, 2]):', betterTypeof([1, 2]));
+console.log('betterTypeof(42):', betterTypeof(42));
+console.log("betterTypeof('hi'):", betterTypeof('hi'));
 
-/**
- * Return true only when `val` is actually NaN.
- * Must NOT return true for undefined, strings, or other non-NaN values.
- */
-export function isActuallyNaN(val) {
-  return val !== val || isNaN(val);
-}
+console.log('\n--- isActuallyNaN ---');
+console.log('isActuallyNaN(NaN):', isActuallyNaN(NaN));
+console.log('isActuallyNaN(undefined):', isActuallyNaN(undefined));
+console.log("isActuallyNaN('hello'):", isActuallyNaN('hello'));
 
-/**
- * Return true when `val` is an array, false otherwise.
- */
-export function isArray(val) {
-  return typeof val === 'array';
-}
+console.log('\n--- isArray ---');
+console.log('isArray([1, 2, 3]):', isArray([1, 2, 3]));
+console.log("isArray('hello'):", isArray('hello'));
+console.log('isArray(null):', isArray(null));
 
-/**
- * Return true when `a` and `b` are the same value, with no gotchas:
- * - NaN and NaN should be considered the same.
- * - +0 and -0 should be considered different.
- */
-export function areSameValue(a, b) {
-  return a === b;
-}
+console.log('\n--- areSameValue ---');
+console.log('areSameValue(1, 1):', areSameValue(1, 1));
+console.log('areSameValue(NaN, NaN):', areSameValue(NaN, NaN));
+console.log('areSameValue(0, -0):', areSameValue(0, -0));

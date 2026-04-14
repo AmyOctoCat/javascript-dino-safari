@@ -6,7 +6,7 @@ import {
   countTruthy,
   hasItems,
   getTimeout,
-} from './index.js';
+} from './coercion.js';
 
 describe('01-bugfix-coercion', () => {
   describe('isUsableReading', () => {

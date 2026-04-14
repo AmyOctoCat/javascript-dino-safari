@@ -1,57 +1,36 @@
-// Bug Hunt: Coercion & Truthiness
-// Every function below has a subtle bug caused by JavaScript coercion or
-// truthiness rules. The tests describe the CORRECT behaviour — run them,
-// read the failures, and fix the code.
+import {
+  isUsableReading,
+  getZoneName,
+  addReadings,
+  countTruthy,
+  hasItems,
+  getTimeout,
+} from './coercion.js';
 
-/**
- * Return true if `reading` is a usable sensor value.
- * Zero IS a valid reading; only null and undefined should be rejected.
- */
-export function isUsableReading(reading) {
-  if (!reading) return false;
-  return true;
-}
+console.log('--- isUsableReading ---');
+console.log('isUsableReading(42):', isUsableReading(42));
+console.log('isUsableReading(0):', isUsableReading(0));
+console.log('isUsableReading(null):', isUsableReading(null));
+console.log('isUsableReading(undefined):', isUsableReading(undefined));
 
-/**
- * Return the zone name, or "Unknown" when the caller passes null/undefined.
- * An empty string "" is a valid (if odd) zone name and must be kept.
- */
-export function getZoneName(zone) {
-  return zone || 'Unknown';
-}
+console.log('\n--- getZoneName ---');
+console.log("getZoneName('Alpha'):", getZoneName('Alpha'));
+console.log("getZoneName(''):", getZoneName(''));
+console.log('getZoneName(null):', getZoneName(null));
 
-/**
- * Add two numeric sensor readings.
- * Callers sometimes pass strings from CSV parsing — always return a number.
- */
-export function addReadings(a, b) {
-  return a + b;
-}
+console.log('\n--- addReadings ---');
+console.log('addReadings(10, 20):', addReadings(10, 20));
+console.log("addReadings('5', '3'):", addReadings('5', '3'));
+console.log("addReadings('7', 3):", addReadings('7', 3));
 
-/**
- * Count how many entries in `flags` are truthy.
- * e.g. [1, 0, true, false, "yes", ""] → 3
- */
-export function countTruthy(flags) {
-  let count = 0;
-  for (const flag of flags) {
-    if (flag == true) count++;
-  }
-  return count;
-}
+console.log('\n--- countTruthy ---');
+console.log("countTruthy([1, 0, true, false, 'yes', '']):", countTruthy([1, 0, true, false, 'yes', '']));
 
-/**
- * Return true when the array has items, false when empty.
- */
-export function hasItems(arr) {
-  if (arr == false) return false;
-  return true;
-}
+console.log('\n--- hasItems ---');
+console.log('hasItems([1, 2, 3]):', hasItems([1, 2, 3]));
+console.log('hasItems([]):', hasItems([]));
 
-/**
- * Return the configured timeout, or 5000 as a default.
- * A timeout of 0 is valid and means "no delay".
- */
-export function getTimeout(config) {
-  return config.timeout || 5000;
-}
+console.log('\n--- getTimeout ---');
+console.log('getTimeout({ timeout: 3000 }):', getTimeout({ timeout: 3000 }));
+console.log('getTimeout({ timeout: 0 }):', getTimeout({ timeout: 0 }));
+console.log('getTimeout({ timeout: null }):', getTimeout({ timeout: null }));

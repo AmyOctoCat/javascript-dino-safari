@@ -1,51 +1,33 @@
-// Bug Hunt: Numbers & Money
-// Every function below has a subtle bug related to JavaScript number handling.
-// The tests describe the CORRECT behaviour — run them, read the failures,
-// and fix the code.
+import {
+  totalPriceCents,
+  parseAge,
+  isStrictlyNaN,
+  safeDivide,
+  roundTo2,
+} from './numbers.js';
 
-/**
- * Sum an array of price strings (e.g. ["12.10", "3.99", "0.01"]) and return
- * the total in integer cents.
- * e.g. ["12.10", "3.99"] → 1609
- */
-export function totalPriceCents(prices) {
-  let sum = 0;
-  for (const p of prices) {
-    sum += parseFloat(p);
-  }
-  return Math.round(sum * 100);
-}
+console.log('--- totalPriceCents ---');
+console.log("totalPriceCents(['10.00', '5.00']):", totalPriceCents(['10.00', '5.00']));
+console.log("totalPriceCents(['0.10', '0.20']):", totalPriceCents(['0.10', '0.20']));
+console.log("totalPriceCents(['12.10', '3.99', '0.01']):", totalPriceCents(['12.10', '3.99', '0.01']));
 
-/**
- * Parse a string into an integer age.
- * Return null if the string is not a clean integer (e.g. "12abc" should be null).
- */
-export function parseAge(input) {
-  const n = parseInt(input);
-  if (isNaN(n)) return null;
-  return n;
-}
+console.log('\n--- parseAge ---');
+console.log("parseAge('25'):", parseAge('25'));
+console.log("parseAge('12abc'):", parseAge('12abc'));
+console.log("parseAge(''):", parseAge(''));
+console.log("parseAge('08'):", parseAge('08'));
 
-/**
- * Return true only when `x` is the actual NaN value.
- * Must not return true for undefined, strings, or other non-number types.
- */
-export function isStrictlyNaN(x) {
-  return isNaN(x);
-}
+console.log('\n--- isStrictlyNaN ---');
+console.log('isStrictlyNaN(NaN):', isStrictlyNaN(NaN));
+console.log('isStrictlyNaN(undefined):', isStrictlyNaN(undefined));
+console.log("isStrictlyNaN('hello'):", isStrictlyNaN('hello'));
 
-/**
- * Safely divide `a` by `b`. Return null when the result would be
- * Infinity, -Infinity, or NaN (e.g. division by zero).
- */
-export function safeDivide(a, b) {
-  return a / b;
-}
+console.log('\n--- safeDivide ---');
+console.log('safeDivide(10, 2):', safeDivide(10, 2));
+console.log('safeDivide(1, 0):', safeDivide(1, 0));
+console.log('safeDivide(0, 0):', safeDivide(0, 0));
 
-/**
- * Return `n` rounded to 2 decimal places as a number (not a string).
- * e.g. 3.456 → 3.46, 10 → 10
- */
-export function roundTo2(n) {
-  return n.toFixed(2);
-}
+console.log('\n--- roundTo2 ---');
+console.log('roundTo2(3.456):', roundTo2(3.456));
+console.log('roundTo2(10):', roundTo2(10));
+console.log('typeof roundTo2(3.456):', typeof roundTo2(3.456));

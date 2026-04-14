@@ -1,36 +1,16 @@
-export class AppError extends Error {
-  /**
-   * @param {string} code
-   * @param {string} message
-   */
-  constructor(code, message) {
-    super(message);
-    this.name = 'AppError';
-    this.code = code;
-  }
+import { AppError } from './app-error.js';
+import { loadConfig } from './load-config.js';
+import { formatLogLine } from './format-log.js';
+
+const err = new AppError('DEMO_ERROR', 'something went wrong');
+console.log(`AppError: code=${err.code}, message=${err.message}`);
+
+try {
+  const config = loadConfig({ PARK_NAME: 'DinoWorld', API_PORT: '3000' });
+  console.log('Config:', config);
+} catch (e) {
+  console.error('Config error:', e.message);
 }
 
-export function loadConfig(env) {
-  const parkName = env.PARK_NAME?.trim();
-  if (!parkName) {
-    throw new AppError('CONFIG_MISSING', 'PARK_NAME is required');
-  }
-
-  const portRaw = env.API_PORT ?? '8080';
-  const port = Number(portRaw);
-  if (!Number.isInteger(port) || port <= 0) {
-    throw new AppError('CONFIG_INVALID', 'API_PORT must be a positive integer');
-  }
-
-  return { parkName, apiPort: port };
-}
-
-export function formatLogLine(level, message, meta) {
-  if (!meta || Object.keys(meta).length === 0) {
-    return `[${level}] ${message}`;
-  }
-  const parts = Object.keys(meta)
-    .sort()
-    .map((k) => `${k}=${meta[k]}`);
-  return `[${level}] ${message} | ${parts.join(' ')}`;
-}
+console.log(formatLogLine('INFO', 'boot', { zone: 'CV', id: '1' }));
+console.log(formatLogLine('WARN', 'slow'));

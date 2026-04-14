@@ -1,5 +1,11 @@
-export const keepEvens = (numbers) => numbers.filter((n) => n % 2 === 0);
+import { keepEvens, overlap, getDangerous } from './filters.js';
 
-export const overlap = (a, b) => a.filter((n) => b.includes(n));
+console.log('keepEvens([1,2,3,4,5,6]):', keepEvens([1, 2, 3, 4, 5, 6]));
+console.log('overlap([1,2,3,4], [3,4,5,6]):', overlap([1, 2, 3, 4], [3, 4, 5, 6]));
 
-export const getDangerous = (dinos) => dinos.filter((d) => d.dangerLevel > 5);
+const dinos = [
+  { species: 'Rex', zone: 'North', dangerLevel: 9 },
+  { species: 'Bronto', zone: 'Lake', dangerLevel: 1 },
+  { species: 'Raptor', zone: 'Ridge', dangerLevel: 7 },
+];
+console.log('getDangerous(dinos):', getDangerous(dinos));

@@ -116,6 +116,18 @@ importers:
         specifier: ^2.1.6
         version: 2.1.9(lightningcss@1.32.0)
 
+  module-02-functions/exercises/02-vitest-contract/solution:
+    devDependencies:
+      vitest:
+        specifier: ^2.1.6
+        version: 2.1.9(lightningcss@1.32.0)
+
+  module-02-functions/exercises/02-vitest-contract/starter:
+    devDependencies:
+      vitest:
+        specifier: ^2.1.6
+        version: 2.1.9(lightningcss@1.32.0)
+
   module-02-functions/exercises/03-arrow-functions/solution:
     devDependencies:
       vitest:

@@ -3,7 +3,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "vitest run"
+    "start": "node .",
+    "test": "vitest run",
+    "debug": "node --inspect-brk ."
   },
   "devDependencies": {
     "vitest": "^2.1.6"

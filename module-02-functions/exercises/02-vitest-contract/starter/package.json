@@ -1,0 +1,13 @@
+{
+  "name": "@dino-safari/vitest-contract-starter",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node .",
+    "test": "vitest run",
+    "debug": "node --inspect-brk ."
+  },
+  "devDependencies": {
+    "vitest": "^2.1.6"
+  }
+}

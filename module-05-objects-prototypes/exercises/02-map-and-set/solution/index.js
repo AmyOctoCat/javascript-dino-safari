@@ -1,19 +1,11 @@
-export function createDinoRegistry() {
-  const byId = new Map();
+import { createDinoRegistry } from './dino-registry.js';
 
-  return {
-    add(dino) {
-      byId.set(dino.trackingId, { ...dino });
-    },
-    get(trackingId) {
-      return byId.get(trackingId);
-    },
-    findByZone(zone) {
-      return [...byId.values()].filter((d) => d.zone === zone);
-    },
-    listSpecies() {
-      const species = new Set([...byId.values()].map((d) => d.species));
-      return [...species].sort();
-    },
-  };
-}
+const registry = createDinoRegistry();
+
+registry.add({ trackingId: 'T01', species: 'Trex', zone: 'Carnivore Canyon', name: 'Rex' });
+registry.add({ trackingId: 'T02', species: 'Triceratops', zone: 'Herbivore Meadow', name: 'Tank' });
+registry.add({ trackingId: 'T03', species: 'Trex', zone: 'Carnivore Canyon', name: 'Fang' });
+
+console.log('Get T01:', registry.get('T01'));
+console.log('Carnivore Canyon:', registry.findByZone('Carnivore Canyon'));
+console.log('Species:', registry.listSpecies());

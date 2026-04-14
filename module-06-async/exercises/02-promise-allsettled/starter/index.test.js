@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { summarizeSensorBatch } from './index.js';
+import { summarizeSensorBatch } from './summarize-batch.js';
 
 describe('02-promise-allsettled', () => {
   it('mixes fulfilled and rejected', async () => {

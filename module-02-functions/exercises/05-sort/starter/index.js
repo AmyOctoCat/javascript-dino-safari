@@ -1,17 +1,14 @@
-/** @param {number[]} numbers */
-export const sortNumbers = (numbers) => {
-  void numbers;
-  return [];
-};
+import { sortNumbers, sortByDanger, sortByName } from './sorters.js';
 
-/** @param {{ species: string, dangerLevel: number }[]} dinos */
-export const sortByDanger = (dinos) => {
-  void dinos;
-  return [];
-};
+const numbers = [10, 1, 21, 2, -5, 0];
+console.log('sortNumbers:', sortNumbers(numbers));
 
-/** @param {{ species: string, dangerLevel: number }[]} dinos */
-export const sortByName = (dinos) => {
-  void dinos;
-  return [];
-};
+const dinos = [
+  { species: 'Compy', dangerLevel: 2 },
+  { species: 'Rex', dangerLevel: 9 },
+  { species: 'Raptor', dangerLevel: 7 },
+  { species: 'Bronto', dangerLevel: 1 },
+];
+
+console.log('sortByDanger:', sortByDanger(dinos));
+console.log('sortByName:', sortByName(dinos));

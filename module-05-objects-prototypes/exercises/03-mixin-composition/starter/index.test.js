@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { withArmor, withFly, withSwim } from './index.js';
+import { withArmor, withFly, withSwim } from './mixins.js';
 
 describe('03-mixin-composition', () => {
   it('withSwim does not mutate', () => {

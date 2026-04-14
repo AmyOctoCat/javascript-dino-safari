@@ -1,17 +1,14 @@
-/** @param {number[]} numbers */
-export const sum = (numbers) => {
-  void numbers;
-  return 0;
-};
+import { sum, countByZone, maxDanger } from './reducers.js';
 
-/** @param {{ species: string, zone: string }[]} dinos */
-export const countByZone = (dinos) => {
-  void dinos;
-  return {};
-};
+const numbers = [1, 2, 3, 4, 5];
+console.log('sum:', sum(numbers));
 
-/** @param {{ species: string, dangerLevel: number }[]} dinos */
-export const maxDanger = (dinos) => {
-  void dinos;
-  return null;
-};
+const dinos = [
+  { species: 'Rex', zone: 'North', dangerLevel: 9 },
+  { species: 'Raptor', zone: 'North', dangerLevel: 7 },
+  { species: 'Bronto', zone: 'Lake', dangerLevel: 1 },
+  { species: 'Compy', zone: 'South', dangerLevel: 2 },
+];
+
+console.log('countByZone:', countByZone(dinos));
+console.log('maxDanger:', maxDanger(dinos));

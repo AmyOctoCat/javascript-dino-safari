@@ -1,22 +1,13 @@
-export function filterHighRiskZones(events) {
-  return events.filter((e) => e.risk === 'high' && e.headcount > 0);
-}
+import { buildMigrationReport } from './pipeline.js';
 
-export function toLogLines(events) {
-  return events.map((e) => `${e.zone}: ${e.headcount} animals`);
-}
+const events = [
+  { zone: 'north', headcount: 12, risk: 'high' },
+  { zone: 'north', headcount: 3, risk: 'low' },
+  { zone: 'south', headcount: 0, risk: 'high' },
+  { zone: 'south', headcount: 5, risk: 'high' },
+];
 
-export function countByZone(events) {
-  return events.reduce((acc, e) => {
-    acc[e.zone] = (acc[e.zone] ?? 0) + e.headcount;
-    return acc;
-  }, {});
-}
-
-export function buildMigrationReport(events) {
-  const filtered = filterHighRiskZones(events);
-  return {
-    lines: toLogLines(filtered),
-    totals: countByZone(filtered),
-  };
-}
+const report = buildMigrationReport(events);
+console.log('Migration Report:');
+console.log('Lines:', report.lines);
+console.log('Totals:', report.totals);

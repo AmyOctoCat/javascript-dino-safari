@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { createDinoRegistry } from './index.js';
+import { createDinoRegistry } from './dino-registry.js';
 
 describe('02-map-and-set', () => {
   it('add, get, overwrite', () => {

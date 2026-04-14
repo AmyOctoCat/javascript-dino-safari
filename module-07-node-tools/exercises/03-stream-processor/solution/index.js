@@ -1,23 +1,9 @@
-import { createReadStream } from 'node:fs';
-import readline from 'node:readline';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { streamFilterDangerous } from './stream-filter.js';
 
-export async function streamFilterDangerous(filePath, minDanger) {
-  const rl = readline.createInterface({ input: createReadStream(filePath) });
-  const out = [];
-  let first = true;
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const fixture = path.join(__dirname, 'fixture.csv');
 
-  for await (const line of rl) {
-    if (first) {
-      first = false;
-      continue;
-    }
-    if (!line.trim()) continue;
-    const [trackingId, dangerRaw, zone] = line.split(',');
-    const dangerLevel = Number(dangerRaw);
-    if (Number.isFinite(dangerLevel) && dangerLevel >= minDanger) {
-      out.push({ trackingId, dangerLevel, zone });
-    }
-  }
-
-  return out;
-}
+const dangerous = await streamFilterDangerous(fixture, 4);
+console.log('Dangerous dinosaurs (danger >= 4):', dangerous);

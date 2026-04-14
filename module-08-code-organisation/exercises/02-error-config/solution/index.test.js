@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { AppError, formatLogLine, loadConfig } from './index.js';
+import { AppError } from './app-error.js';
+import { loadConfig } from './load-config.js';
+import { formatLogLine } from './format-log.js';
 
 describe('02-error-config', () => {
   it('AppError carries code', () => {

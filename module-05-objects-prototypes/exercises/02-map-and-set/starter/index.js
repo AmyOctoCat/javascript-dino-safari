@@ -1,23 +1,11 @@
-/**
- * @returns {{
- *   add: (dino: { trackingId: string, species: string, zone: string, name?: string }) => void,
- *   get: (trackingId: string) => object | undefined,
- *   findByZone: (zone: string) => object[],
- *   listSpecies: () => string[]
- * }}
- */
-export function createDinoRegistry() {
-  // TODO
-  return {
-    add() {},
-    get() {
-      return undefined;
-    },
-    findByZone() {
-      return [];
-    },
-    listSpecies() {
-      return [];
-    },
-  };
-}
+import { createDinoRegistry } from './dino-registry.js';
+
+const registry = createDinoRegistry();
+
+registry.add({ trackingId: 'T01', species: 'Trex', zone: 'Carnivore Canyon', name: 'Rex' });
+registry.add({ trackingId: 'T02', species: 'Triceratops', zone: 'Herbivore Meadow', name: 'Tank' });
+registry.add({ trackingId: 'T03', species: 'Trex', zone: 'Carnivore Canyon', name: 'Fang' });
+
+console.log('Get T01:', registry.get('T01'));
+console.log('Carnivore Canyon:', registry.findByZone('Carnivore Canyon'));
+console.log('Species:', registry.listSpecies());

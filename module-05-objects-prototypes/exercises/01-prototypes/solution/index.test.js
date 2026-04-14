@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { Dinosaur, FlyingDinosaur } from './index.js';
+import { Dinosaur, FlyingDinosaur } from './dinosaur.js';
 
 describe('01-prototypes', () => {
   it('Dinosaur.describe', () => {

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { shout, whisper, formatTag, containsWord, initials } from './index.js';
+import { shout, whisper, formatTag, containsWord, initials } from './strings.js';
 
 describe('01-strings', () => {
   describe('shout', () => {

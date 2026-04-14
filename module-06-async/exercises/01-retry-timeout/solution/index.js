@@ -1,27 +1,29 @@
-export function withTimeout(promise, timeoutMs) {
-  return new Promise((resolve, reject) => {
-    const t = setTimeout(() => reject(new Error('timeout')), timeoutMs);
-    promise.then(
-      (v) => {
-        clearTimeout(t);
-        resolve(v);
-      },
-      (e) => {
-        clearTimeout(t);
-        reject(e);
-      },
-    );
-  });
+import { withTimeout } from './with-timeout.js';
+import { runWithRetry } from './run-with-retry.js';
+
+const sampleTask = () =>
+  new Promise((resolve) => setTimeout(() => resolve('hello'), 50));
+
+console.log('--- withTimeout demo ---');
+try {
+  const result = await withTimeout(sampleTask(), 200);
+  console.log('withTimeout result:', result);
+} catch (err) {
+  console.error('withTimeout error:', err.message);
 }
 
-export async function runWithRetry(task, { maxAttempts, timeoutMs }) {
-  let lastErr;
-  for (let i = 0; i < maxAttempts; i++) {
-    try {
-      return await withTimeout(task(), timeoutMs);
-    } catch (e) {
-      lastErr = e;
-    }
-  }
-  throw lastErr;
+console.log('\n--- runWithRetry demo ---');
+let attempt = 0;
+const flaky = () =>
+  new Promise((resolve, reject) => {
+    attempt++;
+    if (attempt < 3) reject(new Error('transient failure'));
+    else resolve('success');
+  });
+
+try {
+  const result = await runWithRetry(flaky, { maxAttempts: 5, timeoutMs: 200 });
+  console.log('runWithRetry result:', result);
+} catch (err) {
+  console.error('runWithRetry error:', err.message);
 }

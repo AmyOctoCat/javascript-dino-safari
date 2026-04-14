@@ -1,17 +1,13 @@
-/** @param {number[]} numbers */
-export const doubleAll = (numbers) => {
-  void numbers;
-  return [];
-};
+import { doubleAll, extractNames, formatSightings } from './mappers.js';
 
-/** @param {{ species: string, zone: string }[]} dinos */
-export const extractNames = (dinos) => {
-  void dinos;
-  return [];
-};
+const numbers = [1, 2, 3, 4, 5];
+console.log('doubleAll:', doubleAll(numbers));
 
-/** @param {{ species: string, zone: string, dangerLevel: number }[]} dinos */
-export const formatSightings = (dinos) => {
-  void dinos;
-  return [];
-};
+const dinos = [
+  { species: 'Rex', zone: 'North', dangerLevel: 9 },
+  { species: 'Compy', zone: 'South', dangerLevel: 2 },
+  { species: 'Bronto', zone: 'Lake', dangerLevel: 1 },
+];
+
+console.log('extractNames:', extractNames(dinos));
+console.log('formatSightings:', formatSightings(dinos));

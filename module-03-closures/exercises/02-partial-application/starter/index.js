@@ -1,20 +1,9 @@
-/**
- * @param {string} severity
- * @returns {(message: string) => string}
- */
-export function createAlertFn(_severity) {
-  void _severity;
-  // TODO
-  return () => '';
-}
+import { createAlertFn } from './create-alert-fn.js';
+import { createTaggedLogger } from './create-tagged-logger.js';
 
-/**
- * @param {string} tag
- * @param {(message: string) => string} baseAlertFn
- */
-export function createTaggedLogger(_tag, _baseAlertFn) {
-  void _tag;
-  void _baseAlertFn;
-  // TODO
-  return () => '';
-}
+const warn = createAlertFn('WARN');
+console.log(warn('fence stress'));
+
+const crit = createAlertFn('CRITICAL');
+const lagoon = createTaggedLogger('LAGOON', crit);
+console.log(lagoon('breach detected'));

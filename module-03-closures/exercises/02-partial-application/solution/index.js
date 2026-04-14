@@ -1,7 +1,9 @@
-export function createAlertFn(severity) {
-  return (message) => `[${severity}] ${message}`;
-}
+import { createAlertFn } from './create-alert-fn.js';
+import { createTaggedLogger } from './create-tagged-logger.js';
 
-export function createTaggedLogger(tag, baseAlertFn) {
-  return (message) => `${tag}: ${baseAlertFn(message)}`;
-}
+const warn = createAlertFn('WARN');
+console.log(warn('fence stress'));
+
+const crit = createAlertFn('CRITICAL');
+const lagoon = createTaggedLogger('LAGOON', crit);
+console.log(lagoon('breach detected'));

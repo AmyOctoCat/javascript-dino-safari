@@ -1,13 +1,10 @@
-import http from 'node:http';
+import { createDinoApiServer } from './server.js';
 
-/**
- * @param {{ dinosaurs: { trackingId: string }[] }} opts
- */
-export function createDinoApiServer(_opts) {
-  void _opts;
-  // TODO
-  return http.createServer((_req, res) => {
-    res.writeHead(500);
-    res.end('TODO');
-  });
-}
+const dinosaurs = [
+  { trackingId: 'TRX-001', name: 'Rexy', species: 'T-Rex' },
+  { trackingId: 'VLR-042', name: 'Blue', species: 'Velociraptor' },
+];
+
+const server = createDinoApiServer({ dinosaurs });
+console.log('Dino API server created with', dinosaurs.length, 'dinosaurs');
+console.log('Routes: GET /health, GET /dinosaurs, GET /dinosaurs/:id');

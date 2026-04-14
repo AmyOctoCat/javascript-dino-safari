@@ -1,15 +1,9 @@
-import { appendFile, mkdir, readFile } from 'node:fs/promises';
-import path from 'node:path';
+import { appendSighting, readSightings } from './sightings-io.js';
 
-export async function appendSighting(filePath, record) {
-  await mkdir(path.dirname(filePath), { recursive: true });
-  await appendFile(filePath, `${JSON.stringify(record)}\n`, 'utf8');
-}
+const filePath = 'sightings.ndjson';
 
-export async function readSightings(filePath) {
-  const raw = await readFile(filePath, 'utf8');
-  return raw
-    .split('\n')
-    .filter(Boolean)
-    .map((line) => JSON.parse(line));
-}
+await appendSighting(filePath, { id: '1', species: 'T-Rex', zone: 'Cretaceous Valley' });
+await appendSighting(filePath, { id: '2', species: 'Velociraptor', zone: 'Raptor Ridge' });
+
+const sightings = await readSightings(filePath);
+console.log('All sightings:', sightings);

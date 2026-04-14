@@ -1,27 +1,13 @@
-/**
- * @typedef {{ zone: string, headcount: number, risk: 'low' | 'high' }} MigrationEvent
- */
+import { buildMigrationReport } from './pipeline.js';
 
-/** @param {MigrationEvent[]} events */
-export function filterHighRiskZones(events) {
-  void events;
-  return [];
-}
+const events = [
+  { zone: 'north', headcount: 12, risk: 'high' },
+  { zone: 'north', headcount: 3, risk: 'low' },
+  { zone: 'south', headcount: 0, risk: 'high' },
+  { zone: 'south', headcount: 5, risk: 'high' },
+];
 
-/** @param {MigrationEvent[]} events */
-export function toLogLines(events) {
-  void events;
-  return [];
-}
-
-/** @param {MigrationEvent[]} events */
-export function countByZone(events) {
-  void events;
-  return {};
-}
-
-/** @param {MigrationEvent[]} events */
-export function buildMigrationReport(events) {
-  void events;
-  return { lines: [], totals: {} };
-}
+const report = buildMigrationReport(events);
+console.log('Migration Report:');
+console.log('Lines:', report.lines);
+console.log('Totals:', report.totals);

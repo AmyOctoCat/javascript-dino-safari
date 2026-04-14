@@ -5,7 +5,7 @@ import {
   isActuallyNaN,
   isArray,
   areSameValue,
-} from './index.js';
+} from './equality.js';
 
 describe('02-bugfix-equality', () => {
   describe('isNullish', () => {

@@ -4,7 +4,7 @@
 
 ## Tasks
 
-Edit [`start.js`](start.js) and implement `formatSighting(dino)`:
+Edit [`starter/format-sighting.js`](starter/format-sighting.js) and implement `formatSighting(dino)`:
 
 - Use **template literals**.
 - Include **trackingId**, **name**, **species**, **zone**, and **dangerLevel** in the output.
@@ -26,7 +26,7 @@ Example: `[TRX-001] Rex — Tyrannosaurus @ Cretaceous Valley (risk 5)`
 ## Verify
 
 ```bash
-pnpm vitest run module-02-functions/exercises/02-vitest-contract/start.test.js
+cd starter && npm test
 ```
 
-Instructor reference: [`solution.js`](solution.js).
+Instructor reference: [`solution/format-sighting.js`](solution/format-sighting.js).

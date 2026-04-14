@@ -1,28 +1,9 @@
-export function withSwim(dino) {
-  return {
-    ...dino,
-    swim() {
-      return `${dino.name} cuts through the water`;
-    },
-  };
-}
+import { withSwim, withFly, withArmor } from './mixins.js';
 
-export function withFly(dino) {
-  return {
-    ...dino,
-    fly() {
-      return `${dino.name} circles above the canopy`;
-    },
-  };
-}
+const base = { name: 'Mega', armorRating: 10 };
+const megaDino = withFly(withArmor(withSwim(base)));
 
-export function withArmor(dino) {
-  const armorRating = dino.armorRating ?? 8;
-  return {
-    ...dino,
-    armorRating,
-    bash() {
-      return `${dino.name} slams with armor ${armorRating}`;
-    },
-  };
-}
+console.log(megaDino.swim());
+console.log(megaDino.fly());
+console.log(megaDino.bash());
+console.log('Armor rating:', megaDino.armorRating);

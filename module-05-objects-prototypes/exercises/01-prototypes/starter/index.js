@@ -1,11 +1,9 @@
-/**
- * TODO: implement Dinosaur + FlyingDinosaur with prototypes (no class).
- */
+import { Dinosaur, FlyingDinosaur } from './dinosaur.js';
 
-export function Dinosaur() {
-  throw new Error('TODO');
-}
+const tank = new Dinosaur('Tank', 'Triceratops', 'Herbivore Meadow');
+console.log(tank.describe());
 
-export function FlyingDinosaur() {
-  throw new Error('TODO');
-}
+const skyler = new FlyingDinosaur('Skyler', 'Pteranodon', 'Aviary Ascent', 6);
+console.log(skyler.describe());
+console.log('Is Dinosaur?', skyler instanceof Dinosaur);
+console.log('Wingspan:', skyler.wingspanM);

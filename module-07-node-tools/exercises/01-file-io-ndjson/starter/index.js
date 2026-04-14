@@ -1,18 +1,9 @@
-/**
- * @param {string} filePath
- * @param {Record<string, unknown>} record
- */
-export async function appendSighting(_filePath, _record) {
-  void _filePath;
-  void _record;
-  throw new Error('TODO');
-}
+import { appendSighting, readSightings } from './sightings-io.js';
 
-/**
- * @param {string} filePath
- * @returns {Promise<Record<string, unknown>[]>}
- */
-export async function readSightings(_filePath) {
-  void _filePath;
-  return [];
-}
+const filePath = 'sightings.ndjson';
+
+await appendSighting(filePath, { id: '1', species: 'T-Rex', zone: 'Cretaceous Valley' });
+await appendSighting(filePath, { id: '2', species: 'Velociraptor', zone: 'Raptor Ridge' });
+
+const sightings = await readSightings(filePath);
+console.log('All sightings:', sightings);

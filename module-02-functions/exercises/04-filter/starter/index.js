@@ -1,21 +1,11 @@
-/** @param {number[]} numbers */
-export const keepEvens = (numbers) => {
-  void numbers;
-  return [];
-};
+import { keepEvens, overlap, getDangerous } from './filters.js';
 
-/**
- * @param {number[]} a
- * @param {number[]} b
- */
-export const overlap = (a, b) => {
-  void a;
-  void b;
-  return [];
-};
+console.log('keepEvens([1,2,3,4,5,6]):', keepEvens([1, 2, 3, 4, 5, 6]));
+console.log('overlap([1,2,3,4], [3,4,5,6]):', overlap([1, 2, 3, 4], [3, 4, 5, 6]));
 
-/** @param {{ species: string, zone: string, dangerLevel: number }[]} dinos */
-export const getDangerous = (dinos) => {
-  void dinos;
-  return [];
-};
+const dinos = [
+  { species: 'Rex', zone: 'North', dangerLevel: 9 },
+  { species: 'Bronto', zone: 'Lake', dangerLevel: 1 },
+  { species: 'Raptor', zone: 'Ridge', dangerLevel: 7 },
+];
+console.log('getDangerous(dinos):', getDangerous(dinos));

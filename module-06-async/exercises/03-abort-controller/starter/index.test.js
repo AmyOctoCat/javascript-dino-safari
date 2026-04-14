@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { createCancellableTask } from './index.js';
+import { createCancellableTask } from './cancellable-task.js';
 
 describe('03-abort-controller', () => {
   afterEach(() => {

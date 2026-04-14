@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { double, square, add, hello, formatSighting } from './index.js';
+import { double, square, add } from './math.js';
+import { hello, formatSighting } from './format.js';
 
 describe('01-arrow-functions', () => {
   describe('double', () => {

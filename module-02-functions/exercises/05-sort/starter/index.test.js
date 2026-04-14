@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { sortNumbers, sortByDanger, sortByName } from './index.js';
+import { sortNumbers, sortByDanger, sortByName } from './sorters.js';
 
 describe('03-sort', () => {
   describe('sortNumbers', () => {

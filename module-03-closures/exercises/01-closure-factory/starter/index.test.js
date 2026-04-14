@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { createZoneTracker } from './index.js';
+import { createZoneTracker } from './zone-tracker.js';
 
 describe('01-closure-factory', () => {
   it('isolates state per zone', () => {

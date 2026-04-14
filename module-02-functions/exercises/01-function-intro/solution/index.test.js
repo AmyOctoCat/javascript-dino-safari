@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { add, multiply, greet, isEven, initials } from './index.js';
+import { add, multiply, isEven } from './math.js';
+import { greet, initials } from './strings.js';
 
 describe('01-function-intro', () => {
   describe('add', () => {

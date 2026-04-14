@@ -5,7 +5,7 @@ import {
   isStrictlyNaN,
   safeDivide,
   roundTo2,
-} from './index.js';
+} from './numbers.js';
 
 describe('03-bugfix-numbers', () => {
   describe('totalPriceCents', () => {

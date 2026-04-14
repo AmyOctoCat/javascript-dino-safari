@@ -1,5 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { runWithRetry, withTimeout } from './index.js';
+import { withTimeout } from './with-timeout.js';
+import { runWithRetry } from './run-with-retry.js';
 
 describe('01-retry-timeout', () => {
   afterEach(() => {

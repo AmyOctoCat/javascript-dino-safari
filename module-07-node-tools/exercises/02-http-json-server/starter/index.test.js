@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it } from 'vitest';
-import { createDinoApiServer } from './index.js';
+import { createDinoApiServer } from './server.js';
 
 function listen(server) {
   return new Promise((resolve) => {

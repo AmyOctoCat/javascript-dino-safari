@@ -1,7 +1,7 @@
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
-import { streamFilterDangerous } from './index.js';
+import { streamFilterDangerous } from './stream-filter.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const fixture = path.join(__dirname, 'fixture.csv');

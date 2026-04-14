@@ -1,28 +1,9 @@
-import path from 'node:path';
-import pc from 'picocolors';
-import { getRiskLabel } from './risk-levels.js';
+import { formatAlert } from './format-alert.js';
+import { getExtension } from './get-extension.js';
 
-/**
- * @param {Record<string, unknown> | null | undefined} dino
- * @returns {string}
- */
-export function formatAlert(dino) {
-  const name = dino?.name ?? 'Unknown';
-  const zone = dino?.zone ?? 'Uncharted';
-  const dangerLevel = dino?.dangerLevel ?? 0;
+console.log(formatAlert({ name: 'Rex', zone: 'Valley', dangerLevel: 5 }));
+console.log(formatAlert({ name: 'Bronto', zone: 'Lake', dangerLevel: 1 }));
+console.log(formatAlert(null));
 
-  const label = getRiskLabel(dangerLevel);
-
-  const coloured =
-    dangerLevel >= 4 ? pc.red(label) : dangerLevel >= 2 ? pc.yellow(label) : pc.green(label);
-
-  return `[${coloured}] ${name} @ ${zone}`;
-}
-
-/**
- * @param {string} filename
- * @returns {string}
- */
-export function getExtension(filename) {
-  return path.extname(filename);
-}
+console.log('Extension of "data.json":', getExtension('data.json'));
+console.log('Extension of "index.js":', getExtension('index.js'));

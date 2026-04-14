@@ -1,6 +1,7 @@
 import pc from 'picocolors';
 import { describe, expect, it } from 'vitest';
-import { formatAlert, getExtension } from './index.js';
+import { formatAlert } from './format-alert.js';
+import { getExtension } from './get-extension.js';
 
 describe('03-esm-imports: formatAlert', () => {
   it('formats a full record with coloured risk label', () => {

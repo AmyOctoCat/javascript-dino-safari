@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { sum, countByZone, maxDanger } from './index.js';
+import { sum, countByZone, maxDanger } from './reducers.js';
 
 describe('05-reduce', () => {
   describe('sum', () => {

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { keepEvens, overlap, getDangerous } from './index.js';
+import { keepEvens, overlap, getDangerous } from './filters.js';
 
 describe('02-filter', () => {
   describe('keepEvens', () => {

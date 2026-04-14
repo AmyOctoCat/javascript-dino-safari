@@ -1,43 +1,8 @@
-/**
- * Returns the number doubled.
- * @param {number} n
- */
-export const double = (n) => {
-  void n;
-};
+import { double, square, add } from './math.js';
+import { hello, formatSighting } from './format.js';
 
-/**
- * Returns the number squared (multiplied by itself).
- * @param {number} n
- */
-export const square = (n) => {
-  void n;
-};
-
-/**
- * Returns the sum of two numbers.
- * @param {number} a
- * @param {number} b
- */
-export const add = (a, b) => {
-  void a;
-  void b;
-};
-
-/**
- * Returns a greeting string: "Hello, <name>!"
- * @param {string} name
- */
-export const hello = (name) => {
-  void name;
-};
-
-/**
- * Returns "<species> spotted in <zone>".
- * @param {string} species
- * @param {string} zone
- */
-export const formatSighting = (species, zone) => {
-  void species;
-  void zone;
-};
+console.log('double(5):', double(5));
+console.log('square(4):', square(4));
+console.log('add(2, 3):', add(2, 3));
+console.log('hello("Ellie"):', hello('Ellie'));
+console.log('formatSighting("Rex", "North Ridge"):', formatSighting('Rex', 'North Ridge'));

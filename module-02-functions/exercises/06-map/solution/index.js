@@ -1,6 +1,13 @@
-export const doubleAll = (numbers) => numbers.map((n) => n * 2);
+import { doubleAll, extractNames, formatSightings } from './mappers.js';
 
-export const extractNames = (dinos) => dinos.map((d) => d.species);
+const numbers = [1, 2, 3, 4, 5];
+console.log('doubleAll:', doubleAll(numbers));
 
-export const formatSightings = (dinos) =>
-  dinos.map((d) => `${d.species} (${d.zone}) — danger: ${d.dangerLevel}`);
+const dinos = [
+  { species: 'Rex', zone: 'North', dangerLevel: 9 },
+  { species: 'Compy', zone: 'South', dangerLevel: 2 },
+  { species: 'Bronto', zone: 'Lake', dangerLevel: 1 },
+];
+
+console.log('extractNames:', extractNames(dinos));
+console.log('formatSightings:', formatSightings(dinos));

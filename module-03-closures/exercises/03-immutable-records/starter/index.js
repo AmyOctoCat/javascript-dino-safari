@@ -1,13 +1,10 @@
-/**
- * TODO: implement immutably (tests freeze inputs).
- * Current code mutates on purpose so you can see the red tests first.
- */
-export function bumpDangerLevel(dino, delta) {
-  dino.dangerLevel += delta;
-  return dino;
-}
+import { bumpDangerLevel, renameZone } from './record-transforms.js';
 
-export function renameZone(dino, newZone) {
-  dino.zone = newZone;
-  return dino;
-}
+const rex = { name: 'Rex', zone: 'CV', dangerLevel: 4, tags: ['apex'] };
+
+const bumped = bumpDangerLevel(rex, 1);
+console.log('Original:', rex);
+console.log('After bump:', bumped);
+
+const moved = renameZone(rex, 'Quarantine Bay');
+console.log('After rename:', moved);

@@ -1,13 +1,11 @@
-/**
- * @param {number} delayMs
- */
-export function createCancellableTask(_delayMs) {
-  void _delayMs;
-  // TODO
-  return {
-    start() {
-      return Promise.reject(new Error('TODO'));
-    },
-    cancel() {},
-  };
+import { createCancellableTask } from './cancellable-task.js';
+
+console.log('--- createCancellableTask demo ---');
+const task = createCancellableTask(500);
+
+try {
+  const result = await task.start('myValue');
+  console.log('Task completed:', result);
+} catch (err) {
+  console.error('Task error:', err.message);
 }

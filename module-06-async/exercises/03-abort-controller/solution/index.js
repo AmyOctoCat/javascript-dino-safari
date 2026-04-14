@@ -1,33 +1,11 @@
-export function createCancellableTask(delayMs) {
-  let controller = null;
+import { createCancellableTask } from './cancellable-task.js';
 
-  return {
-    start(value) {
-      controller = new AbortController();
-      const { signal } = controller;
+console.log('--- createCancellableTask demo ---');
+const task = createCancellableTask(500);
 
-      return new Promise((resolve, reject) => {
-        const onAbort = () => {
-          reject(new Error('aborted'));
-        };
-        signal.addEventListener('abort', onAbort, { once: true });
-
-        const t = setTimeout(() => {
-          signal.removeEventListener('abort', onAbort);
-          if (!signal.aborted) resolve(`done:${value}`);
-        }, delayMs);
-
-        signal.addEventListener(
-          'abort',
-          () => {
-            clearTimeout(t);
-          },
-          { once: true },
-        );
-      });
-    },
-    cancel() {
-      controller?.abort();
-    },
-  };
+try {
+  const result = await task.start('myValue');
+  console.log('Task completed:', result);
+} catch (err) {
+  console.error('Task error:', err.message);
 }

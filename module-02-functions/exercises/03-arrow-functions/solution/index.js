@@ -1,9 +1,8 @@
-export const double = (n) => n * 2;
+import { double, square, add } from './math.js';
+import { hello, formatSighting } from './format.js';
 
-export const square = (n) => n * n;
-
-export const add = (a, b) => a + b;
-
-export const hello = (name) => `Hello, ${name}!`;
-
-export const formatSighting = (species, zone) => `${species} spotted in ${zone}`;
+console.log('double(5):', double(5));
+console.log('square(4):', square(4));
+console.log('add(2, 3):', add(2, 3));
+console.log('hello("Ellie"):', hello('Ellie'));
+console.log('formatSighting("Rex", "North Ridge"):', formatSighting('Rex', 'North Ridge'));

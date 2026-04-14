@@ -1,21 +1,8 @@
-/**
- * @param {string} zoneName
- * @returns {{
- *   logSighting: (assetId: string, note: string) => void,
- *   getSightings: () => { assetId: string, note: string }[],
- *   getCount: () => number
- * }}
- */
-export function createZoneTracker(_zoneName) {
-  void _zoneName;
-  // TODO
-  return {
-    logSighting() {},
-    getSightings() {
-      return [];
-    },
-    getCount() {
-      return 0;
-    },
-  };
-}
+import { createZoneTracker } from './zone-tracker.js';
+
+const ridge = createZoneTracker('Ridge');
+
+ridge.logSighting('VLR-1', 'spotted near north fence');
+
+console.log('Sighting count:', ridge.getCount());
+console.log('All sightings:', ridge.getSightings());

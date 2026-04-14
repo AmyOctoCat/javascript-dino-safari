@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { doubleAll, extractNames, formatSightings } from './index.js';
+import { doubleAll, extractNames, formatSightings } from './mappers.js';
 
 describe('04-map', () => {
   describe('doubleAll', () => {
