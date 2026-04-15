@@ -229,6 +229,7 @@ const result = add(2, 3);  // 5`,
       ],
     },
   },
+
   {
     type: 'code',
     content: {
@@ -249,9 +250,33 @@ const buildAlert = (zone, level) => {
     },
   },
   {
+    type: 'code',
+    content: {
+      title: 'ESM in Node',
+      code: `
+export const PARK = 'Dinosaur Safari';
+export default function briefing() {
+  console.log(\`Welcome to \${PARK}\`);
+}
+  
+// Elsewhere...
+
+import briefing, { PARK } from './briefing.js';
+
+briefing();
+console.log(\`Welcome to \${PARK}\`);
+`,
+      highlights: [
+        '"type": "module" unlocks import/export in .js files',
+        'Default export = one “main” thing; named = many',
+      ],
+    },
+  },
+
+  {
     type: 'comparison',
     content: {
-      title: 'ESM vs the old CommonJS herd',
+      title: 'ESM vs CommonJS',
       left: {
         label: 'ESM (what we use)',
         items: [
@@ -265,27 +290,9 @@ const buildAlert = (zone, level) => {
         items: [
           '`require` / `module.exports`',
           'Still in older codebases',
-          'Prefer ESM for new park systems',
+          'Prefer ESM for new projects',
         ],
       },
-    },
-  },
-  {
-    type: 'code',
-    content: {
-      title: 'ESM in Node',
-      code: `// package.json
-{ "type": "module" }
-
-// named + default exports
-export const PARK = 'Dinosaur Safari';
-export default function briefing() {
-  console.log(\`Welcome to \${PARK}\`);
-}`,
-      highlights: [
-        '"type": "module" unlocks import/export in .js files',
-        'Default export = one “main” thing; named = many',
-      ],
     },
   },
   {
@@ -314,25 +321,6 @@ export default function briefing() {
       highlights: [
         'One source of truth for onboarding and CI',
         'Students: complete the package-scripts exercise in this module',
-      ],
-    },
-  },
-  {
-    type: 'code',
-    content: {
-      title: 'Your first function',
-      code: `function greetRanger(name) {
-  return 'Welcome, Ranger ' + name + '.';
-}
-
-console.log(greetRanger('Ellie'));
-// "Welcome, Ranger Ellie."
-
-const result = greetRanger('Alan');
-// Store it, pass it, log it`,
-      highlights: [
-        '`function` declares, `return` sends a value back to the caller',
-        'Forget `return` and you get `undefined` — a classic beginner trap',
       ],
     },
   },
@@ -377,19 +365,6 @@ describe('formatAlert', () => {
         '`node --inspect path/to/script.js` then attach Chrome or your IDE.',
         'Breakpoints > `console.log` when state is complex.',
         'Demo 08 has an intentional bug - practice stepping through loops.',
-      ],
-    },
-  },
-  {
-    type: 'welcome',
-    content: {
-      title: 'Exercises - Base Camp missions',
-      points: [
-        '01 - Strings: shout, whisper, format, search, initials',
-        '02 - Package scripts for the mini tracker',
-        '03 - ESM imports: Node built-in, npm, local module',
-        '04 - Function intro: write your first functions',
-        '05 - Vitest contract: implement formatSighting, tests guard the contract',
       ],
     },
   },
