@@ -1,7 +1,6 @@
 /** @param {number[]} numbers */
 export const sortNumbers = (numbers) => {
-  void numbers;
-  return [];
+  return numbers.sort();
 };
 
 /** @param {{ species: string, dangerLevel: number }[]} dinos */

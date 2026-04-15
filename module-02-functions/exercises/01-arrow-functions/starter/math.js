@@ -2,17 +2,13 @@
  * Returns the number doubled.
  * @param {number} n
  */
-export const double = (n) => {
-  void n;
-};
+export const double = (n) => n * 2;;
 
 /**
  * Returns the number squared (multiplied by itself).
  * @param {number} n
  */
-export const square = (n) => {
-  void n;
-};
+export const square = (n) => n * n;
 
 /**
  * Returns the sum of two numbers.
@@ -20,6 +16,11 @@ export const square = (n) => {
  * @param {number} b
  */
 export const add = (a, b) => {
-  void a;
-  void b;
+  return a + b;
 };
+
+export const hello = (name) => `Hello, ${name}!`;
+
+export const formatSighting = (species, zone) => {
+  return `${species} spotted in ${zone}`;
+}
