@@ -3,7 +3,10 @@
  * @param {string} str
  */
 export const shout = (str) => {
-  void str;
+  const exclaimString = str + '!';
+  const shoutString = exclaimString.toUpperCase();
+  console.log(shoutString);
+  return shoutString;
 };
 
 /**
@@ -11,7 +14,7 @@ export const shout = (str) => {
  * @param {string} str
  */
 export const whisper = (str) => {
-  void str;
+  return `(${str.toLowerCase()})`;
 };
 
 /**
@@ -20,8 +23,7 @@ export const whisper = (str) => {
  * @param {string} zone
  */
 export const formatTag = (id, zone) => {
-  void id;
-  void zone;
+  return `[${id}] ${zone}`
 };
 
 /**
@@ -30,8 +32,7 @@ export const formatTag = (id, zone) => {
  * @param {string} word
  */
 export const containsWord = (str, word) => {
-  void str;
-  void word;
+  return str.includes(word);
 };
 
 /**
@@ -40,5 +41,11 @@ export const containsWord = (str, word) => {
  * @param {string} fullName
  */
 export const initials = (fullName) => {
-  void fullName;
+  const names = fullName.split(" ");
+  console.log(names)
+  const initials = names.map(name => name.charAt(0));
+  console.log(initials)
+  const joinedInitials = initials.join(".") + '.';
+  console.log(joinedInitials);
+  return joinedInitials;
 };
