@@ -18,9 +18,3 @@ export const square = (n) => n * n;
 export const add = (a, b) => {
   return a + b;
 };
-
-export const hello = (name) => `Hello, ${name}!`;
-
-export const formatSighting = (species, zone) => {
-  return `${species} spotted in ${zone}`;
-}

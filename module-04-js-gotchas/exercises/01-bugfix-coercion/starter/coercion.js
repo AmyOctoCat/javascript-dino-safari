@@ -8,6 +8,7 @@
  * Zero IS a valid reading; only null and undefined should be rejected.
  */
 export function isUsableReading(reading) {
+  if (reading == 0) return true
   if (!reading) return false;
   return true;
 }
@@ -17,7 +18,7 @@ export function isUsableReading(reading) {
  * An empty string "" is a valid (if odd) zone name and must be kept.
  */
 export function getZoneName(zone) {
-  return zone || 'Unknown';
+  return zone ?? 'Unknown';
 }
 
 /**
